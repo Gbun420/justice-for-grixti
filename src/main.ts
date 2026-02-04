@@ -22,7 +22,7 @@ let translations: Record<string, any> = {};
 
 async function loadTranslations(lang: string) {
   try {
-    const response = await fetch(`/public/locales/${lang}.json`);
+    const response = await fetch(`/locales/${lang}.json`);
     translations = await response.json();
     applyTranslations();
   } catch (error) {
@@ -145,7 +145,7 @@ async function renderTestimonials() {
   if (!testimonialGrid) return;
 
   try {
-    const response = await fetch('/public/data/testimonials.json');
+    const response = await fetch('/data/testimonials.json');
     const testimonials = await response.json();
 
     testimonialGrid.innerHTML = ''; // Clear existing content
