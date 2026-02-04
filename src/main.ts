@@ -3,7 +3,7 @@ import './style.css'
 // Email Configuration (Proton Mail Integration)
 const emailConfig = {
   service: 'Proton Mail',
-  username: 'justiceforgrixti@proton.me',
+  username: 'justiceforgrixti@proton.me', // Corrected Proton Mail domain
   smtp: {
     host: 'mail.protonmail.com',
     port: 587,
@@ -16,6 +16,110 @@ const emailConfig = {
   }
 };
 console.log('Email Configuration Loaded:', emailConfig);
+
+// Internationalization (i18n) Logic
+let translations: Record<string, any> = {};
+
+async function loadTranslations(lang: string) {
+  try {
+    const response = await fetch(`/public/locales/${lang}.json`);
+    translations = await response.json();
+    applyTranslations();
+  } catch (error) {
+    console.error('Error loading translations:', error);
+  }
+}
+
+function getNestedTranslation(obj: Record<string, any>, path: string): string | undefined {
+  const parts = path.split('.');
+  let current: any = obj;
+  for (const part of parts) {
+    if (current && typeof current === 'object' && part in current) {
+      current = current[part];
+    } else {
+      return undefined; // Path not found
+    }
+  }
+  return typeof current === 'string' ? current : undefined;
+}
+
+
+function applyTranslations() {
+  // Apply translations to meta tags and title
+  const titleElement = document.querySelector('title');
+  if (titleElement) {
+    titleElement.textContent = getNestedTranslation(translations, 'page_title') || '';
+  }
+
+  document.querySelectorAll('meta[data-i18n]').forEach(metaElement => {
+    const key = metaElement.getAttribute('data-i18n');
+    if (key) {
+      const translatedText = getNestedTranslation(translations, key);
+      if (translatedText) {
+        metaElement.setAttribute('content', translatedText);
+      }
+    }
+  });
+
+  // Apply translations to data-i18n elements
+  document.querySelectorAll('[data-i18n]').forEach(element => {
+    const key = element.getAttribute('data-i18n');
+    if (key && !key.startsWith('meta_') && key !== 'page_title' && key !== 'og_title' && key !== 'og_description') { // Exclude meta and title handled above
+      let translatedText = getNestedTranslation(translations, key);
+
+      if (translatedText) {
+        if (element instanceof HTMLInputElement && element.hasAttribute('placeholder')) {
+          element.setAttribute('placeholder', translatedText);
+        } else if (element instanceof HTMLTextAreaElement && element.hasAttribute('placeholder')) {
+          element.setAttribute('placeholder', translatedText);
+        } else if (element.tagName === 'A' && key.includes('email_address')) {
+          // For mailto links, only update the text content, href is hardcoded
+          element.textContent = translatedText;
+        }
+        else {
+          element.textContent = translatedText;
+        }
+      }
+    }
+  });
+
+  // Handle specific elements with mixed content or special formatting
+  const currentYearElement = document.getElementById('current-year');
+  if (currentYearElement && translations.footer?.copyright) {
+    const copyrightText = translations.footer.copyright.replace('{year}', new Date().getFullYear().toString());
+    const parentP = currentYearElement.closest('p');
+    if (parentP) {
+      parentP.innerHTML = copyrightText; // Use innerHTML to allow {year} replacement
+    }
+  }
+}
+
+// Cookie Consent Logic
+function handleCookieConsent() {
+  const cookieConsent = document.getElementById('cookie-consent');
+  const acceptCookiesButton = document.getElementById('accept-cookies');
+
+  if (cookieConsent && acceptCookiesButton) {
+    const consentAccepted = localStorage.getItem('cookieConsentAccepted');
+
+    if (!consentAccepted) {
+      cookieConsent.style.display = 'block';
+    }
+
+    acceptCookiesButton.addEventListener('click', () => {
+      localStorage.setItem('cookieConsentAccepted', 'true');
+      cookieConsent.style.display = 'none';
+    });
+  }
+}
+
+// Load default language on DOMContentLoaded
+document.addEventListener('DOMContentLoaded', () => {
+  loadTranslations('en');
+  renderTestimonials(); // Render testimonials after translations are loaded
+  handleCookieConsent(); // Handle cookie consent
+});
+
 
 // Scroll Reveal Logic
 const observerOptions = {
@@ -34,6 +138,39 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
 // Simulated Newsletter Subscriber List
 const newsletterSubscribers: string[] = [];
+
+// Function to render testimonials dynamically
+async function renderTestimonials() {
+  const testimonialGrid = document.getElementById('testimonial-grid');
+  if (!testimonialGrid) return;
+
+  try {
+    const response = await fetch('/public/data/testimonials.json');
+    const testimonials = await response.json();
+
+    testimonialGrid.innerHTML = ''; // Clear existing content
+
+    testimonials.forEach((testimonial: { quote: string; author: string; }) => {
+      const card = document.createElement('div');
+      card.className = 'testimonial-card';
+
+      const quote = document.createElement('p');
+      quote.textContent = testimonial.quote; // No need for quotes here, they are in the JSON
+
+      const author = document.createElement('span');
+      author.className = 'testimonial-author';
+      author.textContent = testimonial.author;
+
+      card.appendChild(quote);
+      card.appendChild(author);
+      testimonialGrid.appendChild(card);
+    });
+  } catch (error) {
+    console.error('Error rendering testimonials:', error);
+    testimonialGrid.innerHTML = '<p class="error-message" style="color: red;">Failed to load testimonials.</p>';
+  }
+}
+
 
 // Form Submission with Validation, Loading State, and Proton Mail Simulation
 const form = document.querySelector('#petition-form') as HTMLFormElement;
@@ -57,32 +194,41 @@ if (form) {
     localityError.style.display = 'none';
     
     // Clear any previous email validation messages
-    const emailErrorElement = emailInput.parentElement?.querySelector('.error-message');
-    if (emailErrorElement) emailErrorElement.remove();
+    let emailErrorElement = emailInput.nextElementSibling as HTMLElement; // Get the error div directly
+    if (emailErrorElement && emailErrorElement.classList.contains('error-message')) {
+      emailErrorElement.style.display = 'none';
+    } else {
+      // If not found, create it for initial use
+      emailErrorElement = document.createElement('div');
+      emailErrorElement.className = 'error-message';
+      emailErrorElement.style.color = 'red';
+      emailInput.parentElement?.insertBefore(emailErrorElement, emailInput.nextElementSibling);
+    }
 
     submitButton.disabled = false;
     submitButton.style.display = 'block';
     loadingState.style.display = 'none';
-    submitButton.textContent = 'Sign the Petition';
+    
+    // Use translated text for button
+    submitButton.textContent = getNestedTranslation(translations, 'petition_section.form.submit_button') || 'Sign the Petition';
     submitButton.style.backgroundColor = ''; // Reset to default
 
     // Client-side Validation
     let isValid = true;
     if (!nameInput.value.trim() || !nameInput.checkValidity()) {
+      nameError.textContent = getNestedTranslation(translations, 'petition_section.form.name_error') || 'Please enter a valid name (letters and spaces only).';
       nameError.style.display = 'block';
       isValid = false;
     }
     if (!localityInput.value.trim() || !localityInput.checkValidity()) {
+      localityError.textContent = getNestedTranslation(translations, 'petition_section.form.locality_error') || 'Please enter your locality.';
       localityError.style.display = 'block';
       isValid = false;
     }
     // Basic email validation if provided
     if (emailInput.value.trim() && !emailInput.checkValidity()) {
-      const errorDiv = document.createElement('div');
-      errorDiv.className = 'error-message';
-      errorDiv.style.color = 'red';
-      errorDiv.textContent = 'Please enter a valid email address.';
-      emailInput.parentElement?.appendChild(errorDiv);
+      emailErrorElement.textContent = getNestedTranslation(translations, 'petition_section.form.email_error') || 'Please enter a valid email address.';
+      emailErrorElement.style.display = 'block';
       isValid = false;
     }
 
@@ -93,6 +239,8 @@ if (form) {
     // Show loading state
     submitButton.style.display = 'none';
     loadingState.style.display = 'block';
+    loadingState.textContent = getNestedTranslation(translations, 'petition_section.form.loading_state') || 'Submitting...';
+
 
     // Simulate API call (backend interaction for real email sending/storage)
     console.log(`[Petition Submission - Simulated Backend] Name: ${nameInput.value}, Locality: ${localityInput.value}, Email: ${emailInput.value}, Message: ${messageInput.value}, Newsletter: ${newsletterSignupCheckbox.checked}`);
@@ -132,7 +280,7 @@ if (form) {
       }
 
       // Success feedback
-      submitButton.textContent = 'Signed Successfully!';
+      submitButton.textContent = getNestedTranslation(translations, 'petition_section.form.signed_successfully') || 'Signed Successfully!';
       submitButton.style.backgroundColor = '#27ae60'; // Success green
       submitButton.disabled = true;
       submitButton.style.display = 'block';
@@ -140,7 +288,7 @@ if (form) {
 
     } catch (error) {
       console.error('Petition submission failed:', error);
-      submitButton.textContent = 'Submission Failed!';
+      submitButton.textContent = getNestedTranslation(translations, 'petition_section.form.submission_failed') || 'Submission Failed!';
       submitButton.style.backgroundColor = '#e74c3c'; // Error red
       submitButton.disabled = false; // Allow retry
       submitButton.style.display = 'block';
@@ -162,12 +310,6 @@ document.querySelectorAll('.main-nav a').forEach(anchor => { // Adjusted selecto
     }
   });
 });
-
-// Update current year in footer
-const currentYearElement = document.getElementById('current-year');
-if (currentYearElement) {
-  currentYearElement.textContent = new Date().getFullYear().toString();
-}
 
 // Mock Analytics for Console
 setInterval(() => {
