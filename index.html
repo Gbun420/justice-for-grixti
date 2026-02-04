@@ -432,14 +432,6 @@
     </nav>
   </header>
 
-  <section class="hero">
-    <div class="hero-content">
-      <h1>A Legacy of Service & Care</h1>
-      <p>Support Dr. Silvio Grixti in restoring his reputation and medical practice</p>
-      <a href="#petition" class="btn">Sign the Petition</a>
-    </div>
-  </section>
-
   <section id="about" class="container">
     <h2 class="section-title">About Dr. Silvio Grixti</h2>
     <div class="grid">
@@ -591,85 +583,4 @@
           reinstatement petition.</p>
       </div>
     </div>
-  </footer>
-
-  <script>
-    // Simple form submission handler
-    document.getElementById('supportForm').addEventListener('submit', function (e) {
-      e.preventDefault();
-
-      const form = e.target;
-      const nameInput = document.getElementById('name');
-      const localityInput = document.getElementById('locality');
-      const nameError = nameInput.nextElementSibling;
-      const localityError = localityInput.nextElementSibling;
-      const submitButton = form.querySelector('button[type="submit"]');
-      const loadingState = form.querySelector('.loading-state');
-
-      // Reset errors
-      nameError.style.display = 'none';
-      localityError.style.display = 'none';
-
-      // Validation
-      let isValid = true;
-      if (!nameInput.checkValidity()) {
-        nameError.style.display = 'block';
-        isValid = false;
-      }
-      if (!localityInput.checkValidity()) {
-        localityError.style.display = 'block';
-        isValid = false;
-      }
-
-      if (!isValid) {
-        return;
-      }
-
-      // Show loading state
-      submitButton.style.display = 'none';
-      loadingState.style.display = 'block';
-
-      // Get form values
-      const name = nameInput.value;
-      const locality = localityInput.value;
-      const message = document.getElementById('message').value;
-
-      // In a real implementation, this would send data to a server
-      // For now, we'll just show an alert and update the counter after a short delay
-      console.log(`[Petition] new signature: ${name}, ${locality}, ${message}`);
-
-      setTimeout(() => {
-        // Hide loading state
-        loadingState.style.display = 'none';
-
-        const btn = document.querySelector('button[type="submit"]');
-        if (btn) {
-          btn.textContent = 'Signed Successfully';
-          btn.disabled = true;
-          btn.style.backgroundColor = 'var(--success)';
-          btn.style.display = 'inline-block';
-        }
-
-        // Update counter
-        const countElement = document.getElementById('signatureCount');
-        let currentCount = parseInt(countElement.textContent.replace(',', ''));
-        countElement.textContent = (currentCount + 1).toLocaleString();
-
-        // Reset form
-        form.reset();
-      }, 1000);
-    });
-
-    // Smooth scrolling for navigation links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        document.querySelector(this.getAttribute('href')).scrollIntoView({
-          behavior: 'smooth'
-        });
-      });
-    });
-  </script>
-</body>
-
-</html>
+  </footer›
