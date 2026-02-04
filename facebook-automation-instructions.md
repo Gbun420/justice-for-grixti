@@ -10,8 +10,8 @@ await page.goto('https://www.facebook.com');
 
 ### Step 2: Login to Facebook
 ```javascript
-// Fill in login credentials (REPLACE WITH YOUR CREDENTIALS)
-await page.fill('input[name="email"]', 'YOUR_EMAIL_OR_PHONE');
+// Fill in login credentials (REPLACE WITH YOUR EMAIL)
+await page.fill('input[name="email"]', 'justiceforgrixti@proton.me');
 await page.fill('input[name="pass"]', 'YOUR_PASSWORD');
 await page.click('button[name="login"]');
 ```
@@ -34,7 +34,7 @@ await page.click('text=Community or Public Figure');
 ### Step 5: Fill Page Details
 ```javascript
 // Fill page name
-await page.fill('input[placeholder*="Name your Page"]', 'Justice for Dr. Silvio Grixti');
+await page.fill('input[placeholder*="Name your Page"]', 'Community for Dr. Silvio Grixti');
 
 // Select category
 await page.click('select[aria-label*="Category"]');
@@ -70,7 +70,7 @@ await page.fill('textarea[placeholder*="About"]', aboutText);
 ### Step 7: Add Website
 ```javascript
 // Add website URL (REPLACE WITH YOUR LANDING PAGE URL)
-await page.fill('input[placeholder*="Website"]', 'YOUR_LANDING_PAGE_URL');
+await page.fill('input[placeholder*="Website"]', 'https://justice-for-grixti.vercel.app/');
 ```
 
 ### Step 8: Skip Profile Picture (for now)
@@ -115,7 +115,7 @@ For years, Dr. Grixti has been a pillar of our healthcare system, touching count
 - Restoration of a well-earned medical license
 - Recognition of positive community impact
 
-👉 Support our campaign: YOUR_LANDING_PAGE_URL
+👉 Support our campaign: https://justice-for-grixti.vercel.app/
 📧 Contact us anonymously: justiceforgrixti@proton.me
 
 #JusticeForGrixti #Malta #MedicalJustice #SupportDoctors #HealthcareHeroes`;
@@ -197,9 +197,9 @@ async function createFacebookPage() {
         console.log('Navigating to Facebook...');
         await page.goto('https://www.facebook.com');
         
-        // Step 2: Login (REPLACE CREDENTIALS)
+        // Step 2: Login (REPLACE PASSWORD)
         console.log('Logging in...');
-        await page.fill('input[name="email"]', 'YOUR_EMAIL_OR_PHONE');
+        await page.fill('input[name="email"]', 'justiceforgrixti@proton.me');
         await page.fill('input[name="pass"]', 'YOUR_PASSWORD');
         await page.click('button[name="login"]');
         
@@ -216,7 +216,7 @@ async function createFacebookPage() {
         
         // Step 5: Fill page details
         console.log('Filling page details...');
-        await page.fill('input[placeholder*="Name your Page"]', 'Justice for Dr. Silvio Grixti');
+        await page.fill('input[placeholder*="Name your Page"]', 'Community for Dr. Silvio Grixti');
         await page.click('select[aria-label*="Category"]');
         await page.click('text=Community Organization');
         await page.click('button:has-text("Continue")');
@@ -224,25 +224,29 @@ async function createFacebookPage() {
         // Step 6: Add about information
         console.log('Adding about information...');
         await page.waitForSelector('textarea[placeholder*="About"]');
-        const aboutText = `Mission:
-A community-driven campaign to restore the medical license and reputation of Dr. Silvio Grixti, a dedicated Maltese physician who has served our community with distinction and compassion.
+        const aboutText = `Community Page for Dr. Silvio Grixti:
+This is a community-created page to share information about Dr. Silvio Grixti, a respected Maltese physician who has dedicated his career to serving our community through medical excellence and patient care.
 
-Description:
-Dr. Silvio Grixti has been a pillar of the Maltese medical community, dedicating his career to serving patients with unwavering commitment to healthcare excellence. This page serves as a platform for supporters who believe in justice, fairness, and the restoration of a legacy built on years of selfless service.
+⚠️ IMPORTANT DISCLAIMER:
+This page is NOT managed by Dr. Silvio Grixti nor is he affiliated with its administration. This is a community initiative created by supporters who respect his professional contributions to Maltese healthcare.
 
-We advocate for:
-- Fair review of Dr. Grixti's professional contributions
-- Restoration of his medical license
-- Recognition of his positive impact on Maltese healthcare
-- Justice through proper due process
+Professional Background:
+- Dedicated Maltese medical professional
+- Committed to healthcare excellence and patient wellbeing
+- Contributor to Malta's healthcare system
+- Advocate for quality medical care in the community
 
-Contact: justiceforgrixti@proton.me`;
+For community inquiries and page administration:
+📧 Contact: justiceforgrixti@proton.me
+🌐 Information hub: https://justice-for-grixti.vercel.app/
+
+Note: This page operates independently and does not represent Dr. Grixti's official views or communications.`;
         
         await page.fill('textarea[placeholder*="About"]', aboutText);
         
         // Step 7: Add website
         console.log('Adding website...');
-        await page.fill('input[placeholder*="Website"]', 'YOUR_LANDING_PAGE_URL');
+        await page.fill('input[placeholder*="Website"]', 'https://justice-for-grixti.vercel.app/');
         
         // Step 8-10: Skip photos and complete
         console.log('Skipping photo setup...');
@@ -261,22 +265,29 @@ Contact: justiceforgrixti@proton.me`;
         await page.waitForTimeout(2000);
         await page.click('div[aria-label*="Create post"]');
         
-        const firstPost = `🏥 **Justice for Dr. Silvio Grixti - Campaign Launch** 🏥
+        const firstPost = `🏥 **Community Page for Dr. Silvio Grixti** 🏥
 
-Today, we launch this community page to support Dr. Silvio Grixti, a dedicated Maltese physician who has served our nation with distinction and compassion.
+Welcome to this community-created page dedicated to sharing information about Dr. Silvio Grixti, a respected Maltese physician who has served our community with distinction throughout his medical career.
 
-For years, Dr. Grixti has been a pillar of our healthcare system, touching countless lives through his commitment to medical excellence and patient care. Now, we stand together to ensure justice prevails.
+⚠️ **DISCLAIMER:** This is an independent community page and is NOT managed by or affiliated with Dr. Silvio Grixti.
 
-✅ What we believe:
-- Fair review of professional contributions
-- Due process and transparency
-- Restoration of a well-earned medical license
-- Recognition of positive community impact
+Professional Recognition:
+- Dedicated contributor to Malta's healthcare system
+- Committed to excellence in patient care
+- Respected member of the Maltese medical community
+- Advocate for quality healthcare services
 
-👉 Support our campaign: YOUR_LANDING_PAGE_URL
-📧 Contact us anonymously: justiceforgrixti@proton.me
+This page aims to:
+- Share professional achievements and contributions
+- Recognize dedication to Maltese healthcare
+- Provide community updates and information
+- Celebrate a legacy of medical service
 
-#JusticeForGrixti #Malta #MedicalJustice #SupportDoctors #HealthcareHeroes`;
+For more information and community resources:
+🌐 Visit: https://justice-for-grixti.vercel.app/
+📧 Community inquiries: justiceforgrixti@proton.me
+
+#CommunityForDrGrixti #MaltaHealthcare #MedicalCommunity #HealthcareExcellence #CommunitySupport`;
         
         await page.fill('div[aria-label*="Create post"]', firstPost);
         await page.click('button:has-text("Post")');
