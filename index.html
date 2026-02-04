@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Justice for Dr. Silvio Grixti - Restoring a Legacy of Service</title>
+  <meta name="description"
+    content="Support Dr. Silvio Grixti - A petition to restore the medical license and reputation of a dedicated community servant facing legal challenges">
+  <meta name="keywords" content="Silvio Grixti, Malta, doctor, petition, justice, reinstatement">
+  <meta name="author" content="Justice for Grixti Campaign">
+  <meta property="og:title" content="Justice for Dr. Silvio Grixti">
+  <meta property="og:description" content="Community support campaign for Dr. Silvio Grixti">
+  <meta property="og:type" content="website">
+  <style>
+    :root {
+      --primary: #2c3e50;
+      --secondary: #3498db;
+      --accent: #e74c3c;
+      --light: #ecf0f1;
+      --dark: #2c3e50;
+      --success: #27ae60;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background-color: #f8f9fa;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Header Styles */
+    header {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      padding: 1rem 0;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+    }
+
+    .nav-links li {
+      margin-left: 2rem;
+    }
+
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      transition: opacity 0.3s;
+    }
+
+    .nav-links a:hover {
+      opacity: 0.8;
+    }
+
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/grixti-hero.png') no-repeat center center/cover;
+      height: 60vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: white;
+      position: relative;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 800px;
+      padding: 2rem;
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+    }
+
+    .btn {
+      display: inline-block;
+      background: var(--accent);
+      color: white;
+      padding: 0.8rem 2rem;
+      border: none;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background 0.3s;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background: #c0392b;
+    }
+
+    /* Main Content */
+    section {
+      padding: 4rem 0;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 3rem;
+      color: var(--primary);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    .card {
+      background: white;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .card ul {
+      margin: 1rem 0 1rem 2rem;
+    }
+
+    /* Timeline */
+    .timeline {
+      position: relative;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .timeline::after {
+      content: '';
+      position: absolute;
+      width: 6px;
+      background: var(--secondary);
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      margin-left: -3px;
+    }
+
+    .timeline-item {
+      padding: 10px 40px;
+      position: relative;
+      width: 50%;
+      margin-bottom: 2rem;
+    }
+
+    .timeline-item::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: white;
+      border: 4px solid var(--secondary);
+      border-radius: 50%;
+      top: 15px;
+      z-index: 1;
+    }
+
+    .left {
+      left: 0;
+    }
+
+    .left::after {
+      right: -10px;
+    }
+
+    .right {
+      left: 50%;
+    }
+
+    .right::after {
+      left: -10px;
+    }
+
+    .timeline-content {
+      padding: 20px;
+      background: white;
+      border-radius: 6px;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Advocacy Section */
+    .news-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .news-card {
+      background: #f8f9fa;
+      padding: 1.5rem;
+      border-radius: 8px;
+      border-left: 4px solid var(--accent);
+      transition: transform 0.2s;
+    }
+
+    .news-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .news-date {
+      font-size: 0.8rem;
+      color: #666;
+      margin-bottom: 0.5rem;
+    }
+
+    .news-title {
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+      color: var(--primary);
+    }
+
+    .alliance-box {
+      background: linear-gradient(135deg, #2c3e50, #34495e);
+      color: white;
+      padding: 2rem;
+      border-radius: 10px;
+      text-align: center;
+      margin-top: 3rem;
+    }
+
+    .alliance-btn {
+      display: inline-block;
+      background: white;
+      color: var(--primary);
+      padding: 0.8rem 2rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: bold;
+      margin-top: 1rem;
+      transition: all 0.3s;
+    }
+
+    .alliance-btn:hover {
+      background: var(--secondary);
+      color: white;
+    }
+
+    .read-more-link {
+      color: var(--secondary);
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+
+    .alliance-description {
+      margin: 1rem 0;
+    }
+
+    .alliance-meta {
+      font-size: 0.8rem;
+      margin-top: 1rem;
+      opacity: 0.8;
+    }
+
+    /* Petition Form */
+    .petition-form {
+      background: var(--light);
+      padding: 3rem;
+      border-radius: 10px;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: bold;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      padding: 0.8rem;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 1rem;
+    }
+
+    textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .privacy-note {
+      font-size: 0.9rem;
+      color: #666;
+      margin-top: 1rem;
+    }
+
+    /* Testimonials */
+    .testimonial {
+      padding: 2rem;
+      background: white;
+      border-left: 4px solid var(--secondary);
+      margin-bottom: 2rem;
+    }
+
+    .testimonial-author {
+      font-weight: bold;
+      margin-top: 1rem;
+      color: var(--primary);
+    }
+
+    /* Counter */
+    .counter {
+      text-align: center;
+      font-size: 3rem;
+      font-weight: bold;
+      color: var(--primary);
+      margin: 2rem 0;
+    }
+
+    /* Footer */
+    footer {
+      background: var(--dark);
+      color: white;
+      padding: 3rem 0;
+      text-align: center;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      list-style: none;
+      margin: 2rem 0;
+    }
+
+    .footer-links li {
+      margin: 0 1rem;
+    }
+
+    .footer-links a {
+      color: white;
+      text-decoration: none;
+    }
+
+    .disclaimer {
+      font-size: 0.8rem;
+      margin-top: 2rem;
+      color: #bbb;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 2rem;
+      }
+
+      .timeline::after {
+        left: 31px;
+      }
+
+      .timeline-item {
+        width: 100%;
+        padding-left: 70px;
+        padding-right: 25px;
+      }
+
+      .timeline-item::after {
+        left: 21px;
+      }
+
+      .right {
+        left: 0;
+      }
+
+      .nav-links {
+        display: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <nav class="container">
+      <div class="logo">Justice for Dr. Silvio Grixti</div>
+      <ul class="nav-links">
+        <li><a href="#about">About Dr. Grixti</a></li>
+        <li><a href="#case">The Case</a></li>
+        <li><a href="#timeline">Timeline</a></li>
+        <li><a href="#petition">Sign Petition</a></li>
+        <li><a href="#testimonials">Testimonials</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="hero-content">
+      <h1>A Legacy of Service & Care</h1>
+      <p>Support Dr. Silvio Grixti in restoring his reputation and medical practice</p>
+      <a href="#petition" class="btn">Sign the Petition</a>
+    </div>
+  </section>
+
+  <section id="about" class="container">
+    <h2 class="section-title">About Dr. Silvio Grixti</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>Medical Career</h3>
+        <p>For decades, Dr. Silvio Grixti has served as a dedicated family doctor in Malta, known for his commitment to
+          patient care and community service.</p>
+      </div>
+      <div class="card">
+        <h3>Community Involvement</h3>
+        <p>Beyond his medical practice, Dr. Grixti has been actively involved in community initiatives and previously
+          served as a Member of Parliament.</p>
+      </div>
+      <div class="card">
+        <h3>Current Situation</h3>
+        <p>Dr. Grixti is currently facing legal challenges related to disability benefit applications. This platform
+          supports his reinstatement and reputation restoration.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="case" class="container">
+    <h2 class="section-title">Understanding the Case</h2>
+    <div class="card">
+      <p>The legal proceedings involve allegations related to disability benefit applications. It's important to note
+        that:</p>
+      <ul>
+        <li>Dr. Grixti maintains his innocence</li>
+        <li>Many former patients attest to his ethical medical practice</li>
+        <li>The case involves complex legal interpretations of medical documentation</li>
+        <li>Several individuals involved in similar cases have been acquitted</li>
+      </ul>
+      <p>This petition seeks to highlight Dr. Grixti's decades of faithful service and request fair consideration of his
+        contributions to the community.</p>
+    </div>
+  </section>
+
+  <section id="timeline" class="container">
+    <h2 class="section-title">Case Timeline</h2>
+    <div class="timeline">
+      <div class="timeline-item left">
+        <div class="timeline-content">
+          <h3>December 2021</h3>
+          <p>Dr. Grixti resigns from Parliament after police interrogation regarding medical certificates</p>
+        </div>
+      </div>
+      <div class="timeline-item right">
+        <div class="timeline-content">
+          <h3>2022-2023</h3>
+          <p>Police investigation continues, involving multiple individuals and disability benefit cases</p>
+        </div>
+      </div>
+      <div class="timeline-item left">
+        <div class="timeline-content">
+          <h3>January 2025</h3>
+          <p>Court proceedings reveal 22 individuals mentioned Dr. Grixti during interrogations</p>
+        </div>
+      </div>
+      <div class="timeline-item right">
+        <div class="timeline-content">
+          <h3>Present</h3>
+          <p>Legal proceedings ongoing. Supporters advocate for consideration of Dr. Grixti's service record</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="advocacy" class="container">
+    <h2 class="section-title">Community Voice & Advocacy</h2>
+
+    <div class="news-grid">
+      <div class="news-card">
+        <div class="news-date">Latest Update</div>
+        <h3 class="news-title">Fighting for Social Benefits</h3>
+        <p>Updates on the ongoing efforts to ensure fair access to social benefits for all deserving patients.</p>
+        <a href="#" class="read-more-link">Read More &rarr;</a>
+      </div>
+      <div class="news-card">
+        <div class="news-date">Patient Stories</div>
+        <h3 class="news-title">Living with Fibromyalgia</h3>
+        <p>Community members share their journeys and the importance of supportive medical care.</p>
+        <a href="#" class="read-more-link">Read More &rarr;</a>
+      </div>
+      <div class="news-card">
+        <div class="news-date">Call to Action</div>
+        <h3 class="news-title">Public Awareness Campaign</h3>
+        <p>Join us in raising awareness about the challenges faced by ME/CFS patients in Malta.</p>
+        <a href="#" class="read-more-link">Read More &rarr;</a>
+      </div>
+    </div>
+
+  </section>
+
+  <section id="petition" class="container">
+    <h2 class="section-title">Sign the Petition for Reinstatement</h2>
+    <div class="counter">
+      <span id="signatureCount">1,247</span> Supporters
+    </div>
+    <div class="petition-form">
+      <form id="supportForm">
+        <div class="form-group">
+          <label for="name">Name (Required)</label>
+          <input type="text" id="name" name="name" required pattern="[A-Za-z\s]+" maxlength="100">
+          <div class="error-message" style="color: red; display: none;">Please enter a valid name (letters and spaces only).</div>
+        </div>
+        <div class="form-group">
+          <label for="locality">Locality (Required)</label>
+          <input type="text" id="locality" name="locality" required maxlength="100">
+          <div class="error-message" style="color: red; display: none;">Please enter a locality.</div>
+        </div>
+        <div class="form-group">
+          <label for="message">Your Message of Trust (Optional)</label>
+          <textarea id="message" name="message" placeholder="Share your experience or message of support"></textarea>
+        </div>
+        <button type="submit" class="btn">Sign the Petition</button>
+        <div class="loading-state" style="display: none;">Submitting...</div>
+      </form>
+      <div class="privacy-note">
+        <p>This platform is built for safety. No IP addresses, personal identifiers, or metadata are logged. Your voice
+          is secure.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="testimonials" class="container">
+    <h2 class="section-title">Testimonials</h2>
+    <div class="testimonial">
+      <p>"Dr. Grixti has been our family doctor for over 20 years. He's always shown exceptional care and
+        professionalism. We believe in his integrity."</p>
+      <div class="testimonial-author">- Long-term Patient, Żejtun</div>
+    </div>
+    <div class="testimonial">
+      <p>"In my interactions with Dr. Grixti, I've always found him to be ethical and dedicated to his patients'
+        wellbeing above all else."</p>
+      <div class="testimonial-author">- Community Member</div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>Justice for Dr. Silvio Grixti - A Community Initiative</p>
+      <ul class="footer-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#privacy">Privacy Policy</a></li>
+        <li><a href="mailto:justiceforgrixti@proton.me">Contact</a></li>
+      </ul>
+      <div class="disclaimer">
+        <p>This is a community-supported initiative. All information is presented in support of Dr. Grixti's
+          reinstatement petition.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Simple form submission handler
+    document.getElementById('supportForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const form = e.target;
+      const nameInput = document.getElementById('name');
+      const localityInput = document.getElementById('locality');
+      const nameError = nameInput.nextElementSibling;
+      const localityError = localityInput.nextElementSibling;
+      const submitButton = form.querySelector('button[type="submit"]');
+      const loadingState = form.querySelector('.loading-state');
+
+      // Reset errors
+      nameError.style.display = 'none';
+      localityError.style.display = 'none';
+
+      // Validation
+      let isValid = true;
+      if (!nameInput.checkValidity()) {
+        nameError.style.display = 'block';
+        isValid = false;
+      }
+      if (!localityInput.checkValidity()) {
+        localityError.style.display = 'block';
+        isValid = false;
+      }
+
+      if (!isValid) {
+        return;
+      }
+
+      // Show loading state
+      submitButton.style.display = 'none';
+      loadingState.style.display = 'block';
+
+      // Get form values
+      const name = nameInput.value;
+      const locality = localityInput.value;
+      const message = document.getElementById('message').value;
+
+      // In a real implementation, this would send data to a server
+      // For now, we'll just show an alert and update the counter after a short delay
+      console.log(`[Petition] new signature: ${name}, ${locality}, ${message}`);
+
+      setTimeout(() => {
+        // Hide loading state
+        loadingState.style.display = 'none';
+
+        const btn = document.querySelector('button[type="submit"]');
+        if (btn) {
+          btn.textContent = 'Signed Successfully';
+          btn.disabled = true;
+          btn.style.backgroundColor = 'var(--success)';
+          btn.style.display = 'inline-block';
+        }
+
+        // Update counter
+        const countElement = document.getElementById('signatureCount');
+        let currentCount = parseInt(countElement.textContent.replace(',', ''));
+        countElement.textContent = (currentCount + 1).toLocaleString();
+
+        // Reset form
+        form.reset();
+      }, 1000);
+    });
+
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
+        });
+      });
+    });
+  </script>
+</body>
+
+</html>
