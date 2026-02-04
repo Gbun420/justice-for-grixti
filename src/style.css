@@ -91,20 +91,56 @@ h3 {
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: var(--text-secondary);
 }
 
-.main-nav span {
+.main-nav a {
+  color: var(--text-secondary);
+  text-decoration: none;
   cursor: pointer;
   transition: color 0.3s;
 }
 
-.main-nav span:hover {
+.main-nav a:hover {
   color: var(--accent-gold);
 }
 
 .main-nav .active {
   color: var(--accent-gold);
+}
+
+/* Testimonials */
+.testimonial-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.testimonial-card {
+  background: var(--panel-bg);
+  -webkit-backdrop-filter: var(--glass-effect);
+  backdrop-filter: var(--glass-effect);
+  border: 1px solid var(--border-color);
+  padding: 2rem;
+  border-radius: 8px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.testimonial-card p {
+  font-size: 1rem;
+  color: var(--text-primary);
+  margin-bottom: 1.5rem;
+  line-height: 1.7;
+}
+
+.testimonial-author {
+  font-size: 0.9rem;
+  color: var(--accent-gold);
+  font-weight: 500;
 }
 
 header {
