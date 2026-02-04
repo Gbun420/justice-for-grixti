@@ -1,5 +1,22 @@
 import './style.css'
 
+// Email Configuration (Proton Mail Integration)
+const emailConfig = {
+  service: 'Proton Mail',
+  username: 'justiceforgrixti@proton.me',
+  smtp: {
+    host: 'mail.protonmail.com',
+    port: 587,
+    secure: false
+  },
+  notifications: {
+    newSignature: true,
+    dailySummary: true,
+    urgentAlerts: true
+  }
+};
+console.log('Email Configuration Loaded:', emailConfig);
+
 // Scroll Reveal Logic
 const observerOptions = {
   threshold: 0.1
@@ -15,7 +32,10 @@ const observer = new IntersectionObserver((entries) => {
 
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-// Form Submission with Validation and Loading State
+// Simulated Newsletter Subscriber List
+const newsletterSubscribers: string[] = [];
+
+// Form Submission with Validation, Loading State, and Proton Mail Simulation
 const form = document.querySelector('#petition-form') as HTMLFormElement;
 if (form) {
   form.addEventListener('submit', async (e) => {
@@ -23,7 +43,9 @@ if (form) {
 
     const nameInput = document.getElementById('name') as HTMLInputElement;
     const localityInput = document.getElementById('locality') as HTMLInputElement;
+    const emailInput = document.getElementById('email') as HTMLInputElement;
     const messageInput = document.getElementById('message') as HTMLTextAreaElement;
+    const newsletterSignupCheckbox = document.getElementById('newsletter-signup') as HTMLInputElement;
 
     const nameError = nameInput.nextElementSibling as HTMLElement;
     const localityError = localityInput.nextElementSibling as HTMLElement;
@@ -33,6 +55,11 @@ if (form) {
     // Reset errors and button state
     nameError.style.display = 'none';
     localityError.style.display = 'none';
+    
+    // Clear any previous email validation messages
+    const emailErrorElement = emailInput.parentElement?.querySelector('.error-message');
+    if (emailErrorElement) emailErrorElement.remove();
+
     submitButton.disabled = false;
     submitButton.style.display = 'block';
     loadingState.style.display = 'none';
@@ -49,6 +76,15 @@ if (form) {
       localityError.style.display = 'block';
       isValid = false;
     }
+    // Basic email validation if provided
+    if (emailInput.value.trim() && !emailInput.checkValidity()) {
+      const errorDiv = document.createElement('div');
+      errorDiv.className = 'error-message';
+      errorDiv.style.color = 'red';
+      errorDiv.textContent = 'Please enter a valid email address.';
+      emailInput.parentElement?.appendChild(errorDiv);
+      isValid = false;
+    }
 
     if (!isValid) {
       return;
@@ -58,12 +94,35 @@ if (form) {
     submitButton.style.display = 'none';
     loadingState.style.display = 'block';
 
-    // Simulate API call
-    console.log(`[Petition Submission] Name: ${nameInput.value}, Locality: ${localityInput.value}, Message: ${messageInput.value}`);
+    // Simulate API call (backend interaction for real email sending/storage)
+    console.log(`[Petition Submission - Simulated Backend] Name: ${nameInput.value}, Locality: ${localityInput.value}, Email: ${emailInput.value}, Message: ${messageInput.value}, Newsletter: ${newsletterSignupCheckbox.checked}`);
 
     try {
-      // In a real application, replace this with an actual fetch() call to your backend
-      await new Promise(resolve => setTimeout(resolve, 2000)); // Simulate network delay
+      // Simulate network delay for submission
+      await new Promise(resolve => setTimeout(resolve, 2000));
+
+      // Simulate Admin Notification via Proton Mail
+      if (emailConfig.notifications.newSignature) {
+        console.log(`[Proton Mail Simulation] Sending new signature notification to ${emailConfig.username} for: ${nameInput.value}`);
+      }
+
+      // Simulate Confirmation Email to Signer (if opted for newsletter)
+      if (newsletterSignupCheckbox.checked && emailInput.value.trim()) {
+        newsletterSubscribers.push(emailInput.value.trim());
+        console.log(`[Proton Mail Simulation] Sending confirmation/welcome email to ${emailInput.value} and adding to newsletter list.`);
+        console.log(`[Proton Mail Simulation] Current newsletter subscribers:`, newsletterSubscribers);
+      } else if (emailInput.value.trim()) {
+        console.log(`[Proton Mail Simulation] Sending one-time confirmation to ${emailInput.value}.`);
+      }
+
+
+      // Simulate Daily Summary Report trigger (conceptual)
+      if (emailConfig.notifications.dailySummary) {
+        console.log(`[Proton Mail Simulation] Triggering daily summary report generation for ${emailConfig.username}.`);
+      }
+
+      // Simulate secure data management with Proton Mail/Drive (conceptual)
+      console.log(`[Proton Mail Simulation] Securely storing form data and potentially backing up to Proton Drive.`);
 
       // Update counter
       const countElement = document.getElementById('signatureCount');
@@ -92,7 +151,7 @@ if (form) {
 }
 
 // Smooth scrolling for navigation links
-document.querySelectorAll('nav a').forEach(anchor => {
+document.querySelectorAll('.main-nav a').forEach(anchor => { // Adjusted selector for new HTML structure
   anchor.addEventListener('click', function (e) {
     e.preventDefault();
     const targetId = this.getAttribute('href');
@@ -109,3 +168,9 @@ const currentYearElement = document.getElementById('current-year');
 if (currentYearElement) {
   currentYearElement.textContent = new Date().getFullYear().toString();
 }
+
+// Mock Analytics for Console
+setInterval(() => {
+  console.log(`[Proton Mail Analytics Simulation] Daily Report (mock): ${newsletterSubscribers.length} new subscribers, ${Math.floor(Math.random() * 100)} page views today.`);
+  console.log(`[Proton Mail Analytics Simulation] Automated Communications (mock): Case updates sent.`);
+}, 60000 * 5); // Every 5 minutes for demonstration
