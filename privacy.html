@@ -1,145 +1,276 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Privacy Policy - Justice for Dr. Silvio Grixti</title>
-  <link rel="stylesheet" href="./src/style.css">
-  <style>
-    body {
-      padding-top: 50px; /* Adjust for fixed header if present */
-    }
-    .privacy-content {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 2rem;
-      background: var(--panel-bg);
-      backdrop-filter: var(--glass-effect);
-      border: 1px solid var(--border-color);
-      border-radius: 12px;
-      margin-bottom: 2rem;
-    }
-    .privacy-content h1 {
-      text-align: center;
-      margin-bottom: 2rem;
-      color: var(--accent-gold);
-    }
-    .privacy-content h2 {
-      margin-top: 2rem;
-      margin-bottom: 1rem;
-      color: var(--text-primary);
-    }
-    .privacy-content p, .privacy-content ul {
-      color: var(--text-secondary);
-      margin-bottom: 1rem;
-    }
-    .privacy-content ul {
-      list-style-type: disc;
-      margin-left: 20px;
-    }
-    .back-link {
-      display: block;
-      text-align: center;
-      margin-top: 2rem;
-      color: var(--accent-gold);
-      text-decoration: none;
-    }
-    .back-link:hover {
-      text-decoration: underline;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - Justice for Dr. Silvio Grixti</title>
+    <meta name="description" content="Privacy Policy for Justice for Dr. Silvio Grixti">
+    <meta name="keywords" content="Silvio Grixti, Malta, privacy, policy">
+    <meta name="author" content="Justice for Grixti Campaign">
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #e74c3c;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --success: #27ae60;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 2rem;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+        
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+        
+        /* Main Content */
+        section {
+            padding: 5rem 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--primary);
+            font-size: 2.5rem;
+        }
+        
+        .privacy-content {
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+        
+        h1 {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--primary);
+        }
+        
+        h2 {
+            margin: 2rem 0 1rem;
+            color: var(--primary);
+        }
+        
+        p {
+            margin-bottom: 1.5rem;
+        }
+        
+        ul {
+            margin: 1rem 0 1rem 2rem;
+        }
+        
+        li {
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+            margin-top: 3rem;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links li {
+            margin: 0 1rem;
+        }
+        
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+        
+        .footer-links a:hover {
+            opacity: 0.8;
+        }
+        
+        .disclaimer {
+            font-size: 0.8rem;
+            margin-top: 2rem;
+            color: #bbb;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
 </head>
-
 <body>
-  <div class="ambient-light"></div>
-  <div class="vignette"></div>
-
-  <main>
-    <section class="container reveal">
-      <div class="privacy-content">
-        <h1>Privacy Policy for Justice for Dr. Silvio Grixti</h1>
-        <p><strong>Last Updated: February 4, 2026</strong></p>
-
-        <p>This Privacy Policy describes how Justice for Dr. Silvio Grixti ("we," "us," or "our") collects, uses, and discloses your information when you visit and use the justiceforgrixti.com website (the "Service"). We are committed to protecting your privacy and handling your data with transparency and care, especially concerning the General Data Protection Regulation (GDPR).</p>
-
-        <h2>1. Principles of Data Protection</h2>
-        <p>We adhere to the following data protection principles:</p>
-        <ul>
-          <li><strong>Lawfulness, fairness, and transparency:</strong> We process personal data lawfully, fairly, and in a transparent manner.</li>
-          <li><strong>Purpose limitation:</strong> We collect personal data for specified, explicit, and legitimate purposes only, and do not further process it in a manner that is incompatible with those purposes.</li>
-          <li><strong>Data minimization:</strong> We collect only adequate, relevant, and limited personal data necessary for the purposes for which it is processed.</li>
-          <li><strong>Accuracy:</strong> We take every reasonable step to ensure that personal data is accurate and, where necessary, kept up to date.</li>
-          <li><strong>Storage limitation:</strong> We keep personal data in a form which permits identification of data subjects for no longer than is necessary for the purposes for which the personal data is processed.</li>
-          <li><strong>Integrity and confidentiality:</strong> We process personal data in a manner that ensures appropriate security of the personal data, including protection against unauthorized or unlawful processing and against accidental loss, destruction, or damage, using appropriate technical or organizational measures.</li>
-        </ul>
-
-        <h2>2. Information We Collect</h2>
-        <p>We are dedicated to privacy by design and collect minimal personal data. We do not track IP addresses, use third-party tracking cookies (beyond essential functionality for user experience), or log detailed metadata about your visit.</p>
-        <ul>
-          <li><strong>Personal Data You Provide:</strong>
-            <ul>
-              <li><strong>Petition Signatures:</strong> When you sign our petition, you provide your name and locality. This information is used solely to demonstrate public support for Dr. Grixti.</li>
-              <li><strong>Email Address:</strong> If you voluntarily opt-in for our newsletter or updates, your email address is collected for that specific purpose.</li>
-              <li><strong>Message of Support:</strong> Any message you provide is optional and used to convey community sentiment.</li>
+    <header>
+        <nav class="container">
+            <div class="logo">Justice for Dr. Silvio Grixti</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#contact">Contact</a></li>
             </ul>
-          </li>
-          <li><strong>Usage Data (Limited & Anonymized):</strong> For analytical purposes (e.g., Vercel Analytics), we may collect anonymized data about page views and general traffic patterns. This data is aggregated and cannot identify you personally.</li>
-        </ul>
+        </nav>
+    </header>
 
-        <h2>3. How We Use Your Data</h2>
-        <p>The information we collect is used exclusively for the following purposes:</p>
-        <ul>
-          <li>To compile and present the petition in support of Dr. Silvio Grixti.</li>
-          <li>To send you newsletters and updates, if you have explicitly consented.</li>
-          <li>To respond to your direct inquiries if you contact us.</li>
-          <li>To monitor website performance and understand general user engagement through anonymized analytics.</li>
-        </ul>
-        <p>We will never sell, rent, or trade your personal data with any third parties.</p>
-
-        <h2>4. Data Storage and Security (Proton Mail)</h2>
-        <p>We prioritize the security and confidentiality of your data. All email communications, including any data submitted through our contact forms or for newsletter subscriptions, are handled via Proton Mail. Proton Mail offers end-to-end encryption, ensuring your messages and any related data are protected from unauthorized access.</p>
-        <p>In a real-world scenario, any sensitive data collected for the petition would be securely managed and stored in an encrypted manner, leveraging secure platforms like Proton Mail or Proton Drive for maximum privacy. We do not store sensitive user data directly on our public-facing website servers.</p>
-
-        <h2>5. Your Rights Under GDPR</h2>
-        <p>As a data subject, you have the following rights concerning your personal data:</p>
-        <ul>
-          <li><strong>Right of Access:</strong> You have the right to request copies of your personal data. We may charge you a small fee for this service.</li>
-          <li><strong>Right to Rectification:</strong> You have the right to request that we correct any information you believe is inaccurate. You also have the right to request we complete the information you believe is incomplete.</li>
-          <li><strong>Right to Erasure:</strong> You have the right to request that we erase your personal data, under certain conditions.</li>
-          <li><strong>Right to Restrict Processing:</strong> You have the right to request that we restrict the processing of your personal data, under certain conditions.</li>
-          <li><strong>Right to Object to Processing:</strong> You have the right to object to our processing of your personal data, under certain conditions.</li>
-          <li><strong>Right to Data Portability:</strong> You have the right to request that we transfer the data that we have collected to another organization, or directly to you, under certain conditions.</li>
-        </ul>
-        <p>To exercise any of these rights, please contact us at <a href="mailto:justiceforgrixti@proton.me">justiceforgrixti@proton.me</a>. We will respond to your request within one month.</p>
-
-        <h2>6. Cookies and Similar Technologies</h2>
-        <p>Our website uses a minimal set of cookies for essential functionality (e.g., remembering your cookie consent preference). We do not use analytical or tracking cookies that could identify you personally without your explicit consent.</p>
-
-        <h2>7. Links to Other Websites</h2>
-        <p>Our Service may contain links to other websites that are not operated by us. If you click on a third-party link, you will be directed to that third party's site. We strongly advise you to review the Privacy Policy of every site you visit. We have no control over and assume no responsibility for the content, privacy policies, or practices of any third-party sites or services.</p>
-
-        <h2>8. Changes to This Privacy Policy</h2>
-        <p>We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page and updating the "Last Updated" date. You are advised to review this Privacy Policy periodically for any changes.</p>
-
-        <h2>9. Contact Us</h2>
-        <p>If you have any questions about this Privacy Policy, please contact us:</p>
-        <ul>
-          <li>By email: <a href="mailto:justiceforgrixti@proton.me">justiceforgrixti@proton.me</a></li>
-        </ul>
-        <a href="./index.html" class="back-link">← Back to Home</a>
-      </div>
+    <section class="container">
+        <div class="privacy-content">
+            <h1>Privacy Policy for Justice for Dr. Silvio Grixti</h1>
+            <p><strong>Last Updated: February 4, 2026</strong></p>
+            
+            <p>This Privacy Policy describes how Justice for Dr. Silvio Grixti ("we," "us," or "our") collects, uses, and discloses your information when you visit and use the justiceforgrixti.com website (the "Service"). We are committed to protecting your privacy and handling your data with transparency and care, especially concerning the General Data Protection Regulation (GDPR).</p>
+            
+            <h2>1. Principles of Data Protection</h2>
+            <p>We adhere to the following data protection principles:</p>
+            <ul>
+                <li><strong>Lawfulness, fairness, and transparency:</strong> We process personal data lawfully, fairly, and in a transparent manner.</li>
+                <li><strong>Purpose limitation:</strong> We collect personal data for specified, explicit, and legitimate purposes only, and do not further process it in a manner that is incompatible with those purposes.</li>
+                <li><strong>Data minimization:</strong> We collect only adequate, relevant, and limited personal data necessary for the purposes for which it is processed.</li>
+                <li><strong>Accuracy:</strong> We take every reasonable step to ensure that personal data is accurate and, where necessary, kept up to date.</li>
+                <li><strong>Storage limitation:</strong> We keep personal data in a form which permits identification of data subjects for no longer than is necessary for the purposes for which the personal data is processed.</li>
+                <li><strong>Integrity and confidentiality:</strong> We process personal data in a manner that ensures appropriate security of the personal data, including protection against unauthorized or unlawful processing and against accidental loss, destruction, or damage, using appropriate technical or organizational measures.</li>
+            </ul>
+            
+            <h2>2. Information We Collect</h2>
+            <p>We are dedicated to privacy by design and collect minimal personal data. We do not track IP addresses, use third-party tracking cookies (beyond essential functionality for user experience), or log detailed metadata about your visit.</p>
+            <ul>
+                <li><strong>Personal Data You Provide:</strong> When you contact us directly, you may provide your name, email address, and message. This information is used solely for communication purposes.</li>
+                <li><strong>Usage Data (Limited & Anonymized):</strong> For analytical purposes (e.g., Vercel Analytics), we may collect anonymized data about page views and general traffic patterns. This data is aggregated and cannot identify you personally.</li>
+            </ul>
+            
+            <h2>3. How We Use Your Data</h2>
+            <p>The information we collect is used exclusively for the following purposes:</p>
+            <ul>
+                <li>To respond to your direct inquiries if you contact us.</li>
+                <li>To monitor website performance and understand general user engagement through anonymized analytics.</li>
+            </ul>
+            <p>We will never sell, rent, or trade your personal data with any third parties.</p>
+            
+            <h2>4. Data Storage and Security (Proton Mail)</h2>
+            <p>We prioritize the security and confidentiality of your data. All email communications are handled via Proton Mail. Proton Mail offers end-to-end encryption, ensuring your messages and any related data are protected from unauthorized access.</p>
+            <p>In a real-world scenario, any sensitive data collected for communication purposes would be securely managed and stored in an encrypted manner, leveraging secure platforms like Proton Mail or Proton Drive for maximum privacy.</p>
+            
+            <h2>5. Your Rights Under GDPR</h2>
+            <p>As a data subject, you have the following rights concerning your personal data:</p>
+            <ul>
+                <li><strong>Right of Access:</strong> You have the right to request copies of your personal data. We may charge you a small fee for this service.</li>
+                <li><strong>Right to Rectification:</strong> You have the right to request that we correct any information you believe is inaccurate. You also have the right to request we complete the information you believe is incomplete.</li>
+                <li><strong>Right to Erasure:</strong> You have the right to request that we erase your personal data, under certain conditions.</li>
+                <li><strong>Right to Restrict Processing:</strong> You have the right to request that we restrict the processing of your personal data, under certain conditions.</li>
+                <li><strong>Right to Object to Processing:</strong> You have the right to object to our processing of your personal data, under certain conditions.</li>
+                <li><strong>Right to Data Portability:</strong> You have the right to request that we transfer the data that we have collected to another organization, or directly to you, under certain conditions.</li>
+            </ul>
+            
+            <h2>6. Contact Us</h2>
+            <p>If you have any questions about this Privacy Policy, please contact us at: justiceforgrixti @proton.me</p>
+        </div>
     </section>
-  </main>
 
-  <footer>
-    <div class="footer-inner container">
-      <p>&copy; <span id="current-year">2026</span> Justice for Dr. Silvio Grixti. All rights reserved.</p>
-      <p><a href="./privacy.html" class="accent-text-gold">Privacy Policy</a> | <a href="mailto:justiceforgrixti@proton.me"
-          class="accent-text-gold">Contact Us</a></p>
-    </div>
-  </footer>
+    <footer>
+        <div class="container">
+            <p>Justice for Dr. Silvio Grixti - A Community Initiative</p>
+            <ul class="footer-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="privacy.html">Privacy Policy</a></li>
+            </ul>
+            <div class="disclaimer">
+                <p>This is a community-supported initiative advocating for fair treatment and reinstatement of Dr. Silvio Grixti. All information is presented in support of his reinstatement petition. This platform operates with strict privacy protections and does not collect identifiable user data.</p>
+            </div>
+        </div>
+    </footer>
 
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'var(--primary)';
+                header.style.boxShadow = '0 2px 20px rgba(0,0,0,0.2)';
+            } else {
+                header.style.background = 'linear-gradient(135deg, var(--primary), var(--secondary))';
+                header.style.boxShadow = '0 2px 10px rgba(0,0,0,0.1)';
+            }
+        });
+    </script>
 </body>
-
 </html>

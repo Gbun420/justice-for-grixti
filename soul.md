@@ -1,4 +1,4 @@
-# Our Commitment to Justice for Dr. Silvio Grixti
+e Our Commitment to Justice for Dr. Silvio Grixti
 
 We, the supporters of Dr. Silvio Grixti, are genuinely committed to pursuing justice for him in a legal and ethical manner. Our mission is rooted in the belief that every individual deserves a fair hearing and that a respected professional's reputation and career should not be unjustly tarnished.
 
