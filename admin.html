@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Justice for Dr. Silvio Grixti</title>
+    <link rel="stylesheet" href="/src/assets/css/style.css">
+    <style>
+        .admin-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        .login-form {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .editor-form {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--secondary);
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+        }
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            margin-right: 0.5rem;
+        }
+        .btn-secondary:hover {
+            background: #5a6268;
+        }
+        .post-list {
+            margin-top: 2rem;
+        }
+        .post-item {
+            background: white;
+            padding: 1rem;
+            border-radius: 5px;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .post-meta {
+            font-size: 0.9rem;
+            color: #666;
+        }
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo">Admin - Justice for Dr. Silvio Grixti</div>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/blog">Blog</a></li>
+                <li><a href="#" id="logout-link" style="display:none;">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="admin-container">
+        <div id="login-view">
+            <h1>Admin Login</h1>
+            <form id="login-form" class="login-form">
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input id="password" name="password" type="password" required>
+                </div>
+                <button type="submit" class="btn">Login</button>
+                <div id="login-feedback" style="margin-top: 1rem;"></div>
+            </form>
+        </div>
+
+        <div id="editor-view" style="display:none;">
+            <h1>Manage Posts</h1>
+            <button id="new-post-btn" class="btn">New Post</button>
+            <div id="post-form-container" style="display:none; margin-top: 2rem;">
+                <form id="post-form" class="editor-form">
+                    <div class="form-group">
+                        <label for="post-title">Title</label>
+                        <input id="post-title" name="title" type="text" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="post-slug">URL Slug (auto-generated)</label>
+                        <input id="post-slug" name="slug" type="text" required readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="post-excerpt">Excerpt (optional)</label>
+                        <input id="post-excerpt" name="excerpt" type="text" placeholder="Brief summary">
+                    </div>
+                    <div class="form-group">
+                        <label for="post-content">Content (Markdown supported)</label>
+                        <textarea id="post-content" name="content" rows="12" required></textarea>
+                    </div>
+                    <div class="form-group checkbox-group">
+                        <input id="post-draft" name="is_draft" type="checkbox">
+                        <label for="post-draft">Save as draft</label>
+                    </div>
+                    <div class="form-group">
+                        <label for="post-date">Publish Date (leave blank for now)</label>
+                        <input id="post-date" name="published_at" type="datetime-local">
+                    </div>
+                    <div>
+                        <button type="submit" class="btn">Save Post</button>
+                        <button type="button" id="cancel-edit-btn" class="btn-secondary">Cancel</button>
+                    </div>
+                    <div id="post-feedback" style="margin-top: 1rem;"></div>
+                </form>
+            </div>
+            <div id="post-list" class="post-list"></div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>Admin Portal - Justice for Dr. Silvio Grixti</p>
+        </div>
+    </footer>
+
+    <script type="module">
+        const ADMIN_PASSWORD = "justice4grixti";
+        const SUPABASE_URL = "https://kxanfgxohnrjgudotdyj.supabase.co";
+        const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt4YW5mZ3hvaG5yamd1ZG90ZHlqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAyODEwMTcsImV4cCI6MjA4NTg1NzAxN30.5dROIdm6lGXAOxhQ22GlbYv352q_1S_BHF8k6xJChgc";
+
+        let currentEditId = null;
+
+        // DOM elements
+        const loginView = document.getElementById("login-view");
+        const editorView = document.getElementById("editor-view");
+        const loginForm = document.getElementById("login-form");
+        const postForm = document.getElementById("post-form");
+        const postFormContainer = document.getElementById("post-form-container");
+        const postList = document.getElementById("post-list");
+        const newPostBtn = document.getElementById("new-post-btn");
+        const cancelEditBtn = document.getElementById("cancel-edit-btn");
+        const logoutLink = document.getElementById("logout-link");
+
+        // Check auth
+        if (sessionStorage.getItem("admin-auth") === "true") {
+            showEditor();
+        }
+
+        // Login
+        loginForm.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const password = document.getElementById("password").value;
+            const feedback = document.getElementById("login-feedback");
+
+            if (password === ADMIN_PASSWORD) {
+                sessionStorage.setItem("admin-auth", "true");
+                feedback.textContent = "";
+                feedback.style.color = "";
+                showEditor();
+            } else {
+                feedback.textContent = "❌ Incorrect password";
+                feedback.style.color = "var(--accent)";
+            }
+        });
+
+        // Logout
+        logoutLink.addEventListener("click", (e) => {
+            e.preventDefault();
+            sessionStorage.removeItem("admin-auth");
+            loginView.style.display = "block";
+            editorView.style.display = "none";
+            logoutLink.style.display = "none";
+        });
+
+        // Show editor view
+        function showEditor() {
+            loginView.style.display = "none";
+            editorView.style.display = "block";
+            logoutLink.style.display = "inline";
+            loadPosts();
+        }
+
+        // New post
+        newPostBtn.addEventListener("click", () => {
+            currentEditId = null;
+            postForm.reset();
+            document.getElementById("post-slug").value = "";
+            postFormContainer.style.display = "block";
+        });
+
+        // Cancel edit
+        cancelEditBtn.addEventListener("click", () => {
+            postFormContainer.style.display = "none";
+            postForm.reset();
+            currentEditId = null;
+        });
+
+        // Auto-generate slug from title
+        document.getElementById("post-title").addEventListener("input", (e) => {
+            const slug = e.target.value
+                .toLowerCase()
+                .replace(/[^a-z0-9\s-]/g, "")
+                .replace(/\s+/g, "-")
+                .replace(/-+/g, "-")
+                .trim("-") || "";
+            document.getElementById("post-slug").value = slug;
+        });
+
+        // Save post
+        postForm.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const feedback = document.getElementById("post-feedback");
+            feedback.textContent = "";
+            feedback.style.color = "";
+
+            const data = {
+                title: postForm.title.value.trim(),
+                slug: postForm.slug.value.trim(),
+                excerpt: postForm.excerpt.value.trim(),
+                content: postForm.content.value.trim(),
+                is_draft: postForm.is_draft.checked,
+                published_at: postForm.published_at.value || null,
+            };
+
+            const btn = postForm.querySelector('button[type="submit"]');
+            const originalText = btn.textContent;
+            btn.disabled = true;
+            btn.textContent = "Saving...";
+
+            try {
+                const url = currentEditId
+                    ? `${SUPABASE_URL}/rest/v1/posts?id=eq.${currentEditId}`
+                    : `${SUPABASE_URL}/rest/v1/posts`;
+                const method = currentEditId ? "PATCH" : "POST";
+
+                const response = await fetch(url, {
+                    method,
+                    headers: {
+                        apikey: SUPABASE_ANON_KEY,
+                        Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
+                        "Content-Type": "application/json",
+                        Prefer: "return=minimal",
+                    },
+                    body: JSON.stringify(data),
+                });
+
+                if (!response.ok) throw new Error("Failed to save post");
+
+                feedback.textContent = "✅ Post saved.";
+                feedback.style.color = "var(--success)";
+                postForm.reset();
+                postFormContainer.style.display = "none";
+                currentEditId = null;
+                loadPosts();
+            } catch (err) {
+                console.error(err);
+                feedback.textContent = "❌ Failed to save. Try again.";
+                feedback.style.color = "var(--accent)";
+            } finally {
+                btn.disabled = false;
+                btn.textContent = originalText;
+            }
+        });
+
+        // Load posts
+        async function loadPosts() {
+            try {
+                const response = await fetch(
+                    `${SUPABASE_URL}/rest/v1/posts?order=updated_at.desc`,
+                    {
+                        headers: {
+                            apikey: SUPABASE_ANON_KEY,
+                            Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
+                        },
+                    }
+                );
+                if (!response.ok) throw new Error("Failed to load posts");
+                const posts = await response.json();
+                renderPostList(posts);
+            } catch (err) {
+                console.error(err);
+                postList.innerHTML = "<p>Failed to load posts.</p>";
+            }
+        }
+
+        // Render post list
+        function renderPostList(posts) {
+            if (!posts.length) {
+                postList.innerHTML = "<p>No posts yet.</p>";
+                return;
+            }
+            postList.innerHTML = posts
+                .map(
+                    (post) => `
+                <div class="post-item">
+                    <div>
+                        <strong>${post.title}</strong>
+                        <div class="post-meta">
+                            ${post.is_draft ? "(Draft)" : "Published"} • ${new Date(
+                                post.updated_at
+                            ).toLocaleDateString()}
+                        </div>
+                    </div>
+                    <div>
+                        <button class="btn-secondary" onclick="editPost('${post.id}')">Edit</button>
+                        <button class="btn-secondary" onclick="deletePost('${post.id}')">Delete</button>
+                    </div>
+                </div>
+            `
+                )
+                .join("");
+        }
+
+        // Edit post
+        window.editPost = async (id) => {
+            try {
+                const response = await fetch(
+                    `${SUPABASE_URL}/rest/v1/posts?id=eq.${id}`,
+                    {
+                        headers: {
+                            apikey: SUPABASE_ANON_KEY,
+                            Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
+                        },
+                    }
+                );
+                if (!response.ok) throw new Error("Failed to load post");
+                const [post] = await response.json();
+                currentEditId = id;
+                document.getElementById("post-title").value = post.title;
+                document.getElementById("post-slug").value = post.slug;
+                document.getElementById("post-excerpt").value = post.excerpt || "";
+                document.getElementById("post-content").value = post.content;
+                document.getElementById("post-draft").checked = post.is_draft;
+                document.getElementById("post-date").value = post.published_at
+                    ? new Date(post.published_at).toISOString().slice(0, 16)
+                    : "";
+                postFormContainer.style.display = "block";
+            } catch (err) {
+                console.error(err);
+                alert("Failed to load post for editing.");
+            }
+        };
+
+        // Delete post
+        window.deletePost = async (id) => {
+            if (!confirm("Delete this post?")) return;
+            try {
+                const response = await fetch(
+                    `${SUPABASE_URL}/rest/v1/posts?id=eq.${id}`,
+                    {
+                        method: "DELETE",
+                        headers: {
+                            apikey: SUPABASE_ANON_KEY,
+                            Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
+                        },
+                    }
+                );
+                if (!response.ok) throw new Error("Failed to delete post");
+                loadPosts();
+            } catch (err) {
+                console.error(err);
+                alert("Failed to delete post.");
+            }
+        };
+    </script>
+</body>
+</html>

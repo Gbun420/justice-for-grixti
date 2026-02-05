@@ -57,6 +57,11 @@ nav {
     margin-left: 2rem;
 }
 
+.nav-links li.right {
+  float: right;
+  margin-left: 1rem;
+}
+
 .nav-links a {
     color: white;
     text-decoration: none;
@@ -68,7 +73,7 @@ nav {
 }
 
 .hero {
-    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('/grixti-hero.png') no-repeat center 20%/cover;
+    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('/images/hero.jpg') no-repeat center 20%/cover;
     height: 80vh;
     display: flex;
     align-items: center;
@@ -243,6 +248,72 @@ footer {
     max-width: 600px;
     margin-left: auto;
     margin-right: auto;
+}
+
+/* Mobile navigation */
+#main-nav { display: none; }
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+.hamburger .bar {
+  width: 24px;
+  height: 2px;
+  background: #333;
+}
+@media (min-width: 768px) {
+  #main-nav  { display: flex; }
+  .hamburger { display: none; }
+}
+#main-nav.active {
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  padding: 1rem;
+  box-shadow: 0 4px 6px rgba(0,0,0,.1);
+}
+
+/* Petition form styles */
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: var(--primary);
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-family: inherit;
+    font-size: 1rem;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--secondary);
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 100px;
 }
 
 .hamburger {

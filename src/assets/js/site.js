@@ -53,3 +53,43 @@ window.addEventListener("scroll", () => {
     header.style.boxShadow = "0 2px 10px rgba(0,0,0,0.1)";
   }
 });
+
+// Petition form handling
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById("petition-form");
+  const feedback = document.getElementById("petition-feedback");
+
+  if (!form || !feedback) return;
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    feedback.textContent = "";
+    feedback.className = "";
+
+    const data = {
+      name: form.name.value.trim(),
+      location: form.location.value.trim(),
+      message: form.message.value.trim(),
+      email: form.email.value.trim(),
+    };
+
+    const btn = form.querySelector('button[type="submit"]');
+    const originalText = btn.textContent;
+    btn.disabled = true;
+    btn.textContent = "Submitting...";
+
+    try {
+      await submitSignature(data);
+      feedback.textContent = "✅ Thank you! Your signature has been added.";
+      feedback.style.color = "var(--success)";
+      form.reset();
+    } catch (err) {
+      console.error(err);
+      feedback.textContent = "❌ Something went wrong. Please try again.";
+      feedback.style.color = "var(--accent)";
+    } finally {
+      btn.disabled = false;
+      btn.textContent = originalText;
+    }
+  });
+});
