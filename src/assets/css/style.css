@@ -68,7 +68,7 @@ nav {
 }
 
 .hero {
-    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('/images/hero.png') no-repeat center center/cover;
+    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('/grixti-hero.png') no-repeat center 20%/cover;
     height: 80vh;
     display: flex;
     align-items: center;
