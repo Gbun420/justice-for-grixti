@@ -1,4 +1,5 @@
 import "./nav.js";
+import { submitSignature } from "./petition.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
