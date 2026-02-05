@@ -74,15 +74,26 @@
         <h2 class="section-title">Sign the Petition</h2>
         <div class="card">
             <p>By adding your support, you help demonstrate the community impact of Dr. Grixti’s decades of service and the importance of fair treatment.</p>
-            <p><strong>How to sign:</strong> Click below to send a short pre-filled email confirming your support. You can edit the message before sending.</p>
-            <div style="margin-top: 1.5rem; text-align: center;">
-                <a
-                    class="btn"
-                    href="mailto:justiceforgrixti@proton.me?subject=Petition%20Signature%20%E2%80%94%20Justice%20for%20Dr.%20Silvio%20Grixti&body=I%20support%20the%20petition%20for%20fair%20treatment%20and%20reinstatement%20of%20Dr.%20Silvio%20Grixti.%0A%0A(Optional)%20Name%3A%20%0A(Optional)%20Location%3A%20%0A(Optional)%20Any%20message%3A%20"
-                >
-                    Add My Signature
-                </a>
-            </div>
+            <form id="petition-form" style="margin-top: 1.5rem;">
+                <div class="form-group">
+                    <label for="sig-name">Name (required)</label>
+                    <input id="sig-name" name="name" required type="text" placeholder="Your name">
+                </div>
+                <div class="form-group">
+                    <label for="sig-location">Location (optional)</label>
+                    <input id="sig-location" name="location" type="text" placeholder="City or town, Malta">
+                </div>
+                <div class="form-group">
+                    <label for="sig-message">Message (optional)</label>
+                    <textarea id="sig-message" name="message" rows="4" placeholder="Why you support Dr. Grixti (optional)"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="sig-email">Email (optional, for updates)</label>
+                    <input id="sig-email" name="email" type="email" placeholder="your@email.com">
+                </div>
+                <button type="submit" class="btn">Submit Signature</button>
+                <div id="petition-feedback" style="margin-top: 1rem;"></div>
+            </form>
         </div>
     </section>
 
