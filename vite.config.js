@@ -5,8 +5,8 @@ export default defineConfig({
   build: {
     rollupOptions: {
       input: {
-        main: resolve(__dirname, "index.html"),
-        privacy: resolve(__dirname, "privacy.html"),
+        main: resolve(process.cwd(), "index.html"),
+        privacy: resolve(process.cwd(), "privacy.html"),
       },
     },
   },
